@@ -1,0 +1,120 @@
+/* TaskList.css */
+
+/* Container for the whole task list */
+.task-list-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background-color: #f9f9f9;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeIn 0.8s ease-in;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Heading style */
+h2 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+/* Search input and status select styles */
+.search-input,
+.status-select {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-input:focus,
+.status-select:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 8px rgba(13, 110, 253, 0.4);
+}
+
+/* Individual task item container */
+
+
+.task-item:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Task title and info */
+.task-info {
+  font-size: 1.15rem;
+  flex: 1;
+  color: #333;
+
+  display: flex;           /* Align title and status in a row */
+  align-items: center;     /* Vertically center align */
+  justify-content: space-between; /* Create space between title and status */
+}
+
+
+
+
+
+
+/* Buttons container */
+.task-buttons button {
+  margin-left: 10px;
+  padding: 7px 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  user-select: none;
+}
+
+/* Hover effect for buttons */
+.task-buttons button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Edit button */
+.button-edit {
+  background-color: #0d6efd;
+  color: white;
+}
+
+
+
+.button-save:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* Input and select inside edit mode */
+.edit-mode input,
+.edit-mode select {
+  font-size: 1.1rem;
+  padding: 8px 12px;
+  margin-right: 14px;
+  border-radius: 7px;
+  border: 1.5px solid #ccc;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-mode input:focus,
+.edit-mode select:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 8px rgba(13, 110, 253, 0.4);
+}
