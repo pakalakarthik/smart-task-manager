@@ -81,7 +81,7 @@ function TaskList() {
 //Using material UI
  return (
   <div className="task-list-container">
-    <h2>Task List</h2>
+    <h2>Smart Task Manager</h2>
 
     <TextField
       fullWidth
