@@ -159,6 +159,11 @@ function TaskList() {
                   >
                     Status: {task.status}
                   </Typography>
+                  
+                  <Typography variant="body2" color="textSecondary">
+                        Created At: {new Date(task.createdAt).toLocaleString()}
+                  </Typography>
+
 
                   <Stack direction="row" spacing={1}>
                     <Button variant="contained" color="primary" onClick={() => handleEdit(task)}>
