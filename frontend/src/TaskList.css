@@ -1,5 +1,11 @@
 /* TaskList.css */
 
+
+
+body {
+  background-color: #3c80e7;
+}
+
 /* Container for the whole task list */
 .task-list-container {
   max-width: 600px;
