@@ -28,7 +28,9 @@ function TaskList() {
   // Fetch tasks from backend API
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/tasks');
+      //const response = await axios.get('http://localhost:5000/tasks');
+      const response = await axios.get('https://smart-task-manager-uk23.onrender.com/tasks');
+
       setTasks(response.data); // Store tasks in state
     } catch (error) {
       console.error('Error fetching tasks:', error);
@@ -44,6 +46,8 @@ function TaskList() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/tasks/${id}`);
+      await axios.delete(`https://smart-task-manager-uk23.onrender.com/tasks/${id}`);
+
       fetchTasks(); // Refresh task list after deletion
     } catch (error) {
       console.error('Error deleting task:', error);
@@ -60,7 +64,9 @@ function TaskList() {
   // Save edited task data and exit edit mode
   const handleSave = async () => {
     try {
-      await axios.put(`http://localhost:5000/tasks/${editTaskId}`, {
+      //await axios.put(`http://localhost:5000/tasks/${editTaskId}`, {
+      await axios.put(`https://smart-task-manager-uk23.onrender.com/tasks/${editTaskId}`, {
+
         title: editedTitle,
         status: editedStatus,
       });

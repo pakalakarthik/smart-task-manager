@@ -10,7 +10,9 @@ function AddTask() {
     e.preventDefault(); // Prevent page reload
 
     try {
-      const response = await axios.post('http://localhost:5000/tasks', {
+      //const response = await axios.post('http://localhost:5000/tasks', {
+      const response = await axios.post('https://smart-task-manager-uk23.onrender.com/tasks', {
+
         title,
         description
       });
