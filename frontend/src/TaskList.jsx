@@ -45,7 +45,7 @@ function TaskList() {
   // Delete a task by ID
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/tasks/${id}`);
+      //await axios.delete(`http://localhost:5000/tasks/${id}`);
       await axios.delete(`https://smart-task-manager-uk23.onrender.com/tasks/${id}`);
 
       fetchTasks(); // Refresh task list after deletion
