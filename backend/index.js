@@ -56,9 +56,13 @@ const Task = require('./models/Task');
 // Route to add a new task POST
 app.post('/tasks', async (req, res) => {
   try {
-    const { title, status } = req.body;
+    const { title, status, completed } = req.body;
 
-    const newTask = new Task({ title, status });
+     const newTask = new Task({
+      title,
+      status,
+      completed: completed || false, // fallback to false if not provided
+    });
 
     await newTask.save(); // Save to MongoDB
 
@@ -101,11 +105,11 @@ app.delete('/tasks/:id', async (req, res) => {
 app.put('/tasks/:id', async (req, res) => {
   try {
     const taskId = req.params.id;
-    const { title, status } = req.body;
+    const { title, status, completed } = req.body;
 
     const updatedTask = await Task.findByIdAndUpdate(
       taskId,
-      { title, status },
+      { title, status, completed },
       { new: true }
     );
 
@@ -118,5 +122,4 @@ app.put('/tasks/:id', async (req, res) => {
     res.status(500).json({ message: 'Error updating task', error });
   }
 });
-
 
