@@ -12,17 +12,26 @@ const SECRET = process.env.JWT_SECRET;
 
 const app = express();
 const allowedOrigins = ['https://smart-task-manager-mu.vercel.app'];
+app.options('*', cors()); // ✅ Handle preflight requests
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, or Postman)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error('Not allowed by CORS'));
-    }
-  },
+  // origin: function (origin, callback) {
+  //   // Allow requests with no origin (like mobile apps, curl, or Postman)
+  //   if (!origin) return callback(null, true);
+  //   if (allowedOrigins.includes(origin)) {
+  //     return callback(null, true);
+  //   } else {
+  //     return callback(new Error('Not allowed by CORS'));
+  //   }
+  // },
+  origin : true,
   credentials: true,
 }));
  // Enable Cross-Origin Resource Sharing
