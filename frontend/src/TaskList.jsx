@@ -38,14 +38,22 @@ function TaskList() {
   // -----------------------------
   // ✅ Fetch all tasks from backend API
   // -----------------------------
-  const fetchTasks = async () => {
-    try {
-      const response = await axios.get('https://smart-task-manager-uk23.onrender.com/tasks');
-      setTasks(response.data); // Save the tasks into the state
-    } catch (error) {
-      console.error('Error fetching tasks:', error);
-    }
-  };
+ const fetchTasks = async () => {
+  try {
+    const token = localStorage.getItem('token'); // ✅ Get JWT token
+
+    const response = await axios.get('https://smart-task-manager-uk23.onrender.com/tasks', {
+      headers: {
+        Authorization: `Bearer ${token}`, // ✅ Send token in headers
+      },
+    });
+
+    setTasks(response.data); // ✅ Store tasks in state
+  } catch (error) {
+    console.error('Error fetching tasks:', error);
+  }
+};
+
 
   // -----------------------------
   // ✅ useEffect: Runs once when component is mounted to load tasks
@@ -59,7 +67,12 @@ function TaskList() {
   // -----------------------------
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://smart-task-manager-uk23.onrender.com/tasks/${id}`);
+      const token = localStorage.getItem('token');
+      await axios.delete(`https://smart-task-manager-uk23.onrender.com/tasks/${id}`,{
+      headers: {
+        Authorization: `Bearer ${token}`, // ✅ Send token in headers
+      },
+    });
       fetchTasks(); // Refresh the list after deletion
     } catch (error) {
       console.error('Error deleting task:', error);
@@ -80,7 +93,12 @@ function TaskList() {
   // -----------------------------
   const handleSave = async () => {
     try {
-      await axios.put(`https://smart-task-manager-uk23.onrender.com/tasks/${editTaskId}`, {
+      const token = localStorage.getItem('token');
+      await axios.put(`https://smart-task-manager-uk23.onrender.com/tasks/${editTaskId}`,{
+      headers: {
+        Authorization: `Bearer ${token}`, // ✅ Send token in headers
+      },
+    } ,{
         title: editedTitle,
         status: editedStatus,
       });
@@ -96,10 +114,15 @@ function TaskList() {
   // -----------------------------
   const handleCheckboxToggle = async (task) => {
     try {
+      const token = localStorage.getItem('token');
       // Toggle between completed and pending
       const updatedStatus = task.status === 'completed' ? 'pending' : 'completed';
 
       await axios.put(`https://smart-task-manager-uk23.onrender.com/tasks/${task._id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // ✅ Send token in headers
+      },
+    },{
         title: task.title,
         status: updatedStatus,
       });

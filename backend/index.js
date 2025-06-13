@@ -92,7 +92,12 @@ app.post('/login', async (req, res) => {
 app.post('/tasks', authMiddleware, async (req, res) => {
   try {
     const { title, status, completed } = req.body;
-    const newTask = new Task({ title, status, completed: completed || false });
+    const newTask = new Task({
+      title,
+      status,
+      completed: completed || false,
+      userId: req.user, // ✅ Save user ID from JWT
+    });
     await newTask.save();
     res.status(201).json({ message: 'Task created successfully', task: newTask });
   } catch (error) {
@@ -100,15 +105,18 @@ app.post('/tasks', authMiddleware, async (req, res) => {
   }
 });
 
+
+
 // Get all tasks
 app.get('/tasks', authMiddleware, async (req, res) => {
   try {
-    const tasks = await Task.find();
+    const tasks = await Task.find({ userId: req.user }); // ✅ Show only this user's tasks
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch tasks' });
   }
 });
+
 
 // Delete task
 app.delete('/tasks/:id', authMiddleware, async (req, res) => {
