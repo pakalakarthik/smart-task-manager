@@ -14,13 +14,15 @@ function Login({ onLogin }) {
         password,
       });
 
-      localStorage.setItem('token', response.data.token);
+      console.log('Login response:', response.data); // ✅ Optional debug
+
+      localStorage.setItem('token', response.data.token); // ✅ Save token
       localStorage.setItem('user', JSON.stringify(response.data.user));
-      setMessage('Login successful!');
+      setMessage('✅ Login successful!');
 
       if (onLogin) onLogin();
     } catch (err) {
-      setMessage(err.response?.data?.error || 'Login failed. Please try again.');
+      setMessage(err.response?.data?.error || '❌ Login failed. Please try again.');
     }
   };
 

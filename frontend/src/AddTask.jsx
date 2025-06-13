@@ -7,14 +7,23 @@ function AddTask() {
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent page reload
+  e.preventDefault(); // Prevent page reload
 
-    try {
-      //const response = await axios.post('http://localhost:5000/tasks', {
-      const response = await axios.post('https://smart-task-manager-uk23.onrender.com/tasks', {
+  try {
+    const token = localStorage.getItem('token'); // ⬅️ Get token from storage
+
+    const response = await axios.post(
+      'https://smart-task-manager-uk23.onrender.com/tasks',
+      {
         title,
         description
-      });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}` // ⬅️ Send token to backend
+        }
+      }
+    );
 
       console.log('Response from server:', response.data);
       setMessage('✅ Task added successfully!');
