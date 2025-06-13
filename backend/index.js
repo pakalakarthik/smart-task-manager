@@ -11,29 +11,13 @@ const SECRET = process.env.JWT_SECRET;
  // Should ideally be stored in process.env.SECRET
 
 const app = express();
-const allowedOrigins = ['https://smart-task-manager-mu.vercel.app'];
-app.options('*', cors()); // ✅ Handle preflight requests
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
-});
-
+//const allowedOrigins = ['https://smart-task-manager-mu.vercel.app'];
+//app.options('*', cors()); // ✅ Handle preflight requests
 app.use(cors({
-  // origin: function (origin, callback) {
-  //   // Allow requests with no origin (like mobile apps, curl, or Postman)
-  //   if (!origin) return callback(null, true);
-  //   if (allowedOrigins.includes(origin)) {
-  //     return callback(null, true);
-  //   } else {
-  //     return callback(new Error('Not allowed by CORS'));
-  //   }
-  // },
-  origin : true,
+  origin: '*',  // ✅ Temporarily allow all origins (you can restrict later)
   credentials: true,
 }));
+
  // Enable Cross-Origin Resource Sharing
 app.use(express.json()); // Parse incoming JSON requests
 
